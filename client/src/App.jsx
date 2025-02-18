@@ -1,5 +1,4 @@
 import "./App.css";
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Auth from "./Auth.jsx";
 
@@ -20,12 +19,20 @@ import Footer from "./components/footer/footer.jsx";
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
 
       <Routes>
         <Route path="/register" element={<Signup />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route
+          path="/"
+          element={
+            <Auth>
+                    <Navbar />
+
+            </Auth>
+          }
+        ></Route>
+                <Route
           path="/"
           element={
             <Auth>
