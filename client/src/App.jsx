@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Auth from "./Auth.jsx";
 
 // Import components
@@ -22,14 +22,12 @@ import EditBus from "./components/editBus/editBus.jsx"
 
 function App() {
   return (
-    <HashRouter basename="/">
-      <Routes>
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/reset-password/:token" element={<ResetPassword />} />
-        <Route path="/register" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+    <BrowserRouter>
+      <Navbar />
 
-        {/* Protected Routes */}
+      <Routes>
+        <Route path="/register" element={<Signup />}></Route>
+        <Route path="/login" element={<Login />}></Route>
         <Route
           path="/"
           element={
