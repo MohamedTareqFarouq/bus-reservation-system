@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.success-container{
+  margin: auto;
+    position: absolute;
+    top: 49%;
+    left: 30%;
+}
+
+
+.success-container > p{
+  text-align: center;
+  margin: auto;
+  font-size: 4rem;
+
+}
