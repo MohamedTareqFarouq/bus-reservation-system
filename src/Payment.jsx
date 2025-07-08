@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
+const baseUrl = "https://58bd15b7b2df.ngrok-free.app"
 
 export const Payment = () => {
   const [transactionId, setTransactionId] = useState("");
@@ -46,20 +47,20 @@ export const Payment = () => {
       },
 
       notification_url:
-        "https://webhook.site/f60597f3-97b9-4992-90e1-6f98a63fc32d",
+        `${baseUrl}/api/webhook`,
       redirection_url: "http://localhost:3000/success",
       //Notification and redirection URL are working only with Cards and they overlap the transaction processed and response callbacks sent per Integration ID
     };
 
     await axios
-      .post(`http://localhost:5000/api/pay`, body)
+      .post(`${baseUrl}/api/pay`, body)
       .then((res) => setIframeUrl(res?.data?.PAYMENT_URL))
       .catch((err) => console.error(err.response?.data || err.message));
   };
 
   const handleRefund = async () => {
     try {
-      await axios.post("http://localhost:5000/api/refund", {
+      await axios.post(`${baseUrl}/api/refund`, {
         transaction_id: transactionId,
         amount_cents: amount,
       });
@@ -71,7 +72,7 @@ export const Payment = () => {
 
   const handleOrderQuery = async () => {
     try {
-      await axios.post("http://localhost:5000/api/order_inquiry", {
+      await axios.post(`${baseUrl}/api/order_inquiry`, {
         order_id: orderId,
       });
       console.log(orderId);
@@ -82,7 +83,7 @@ export const Payment = () => {
 
   const handleTransactionQuery = async () => {
     try {
-      await axios.post("http://localhost:5000/api/transaction_inquiry", {
+      await axios.post(`${baseUrl}/api/transaction_inquiry`, {
         transaction_id: transactionId,
       });
       console.log(transactionId);

@@ -1,6 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
+const hmacVerifier = require('./middleware/hamcVerifier')
+const webhookroutes = require('./routes/webhook')
+const paymentOperations = require('./routes/paymentOperations')
+const {fetchPaymobAuthToken} = require('./helperFunctions/fetchPaymobAuthToken')
 require("dotenv").config();
 
 const app = express();
@@ -70,28 +74,6 @@ app.post("/api/refund", async (req, res) => {
   return res.send("Payment Successfully refunded!");
 });
 
-const fetchPaymobAuthToken = async () => {
-  // var token = ''
-  // const response = await axios.post('https://accept.paymob.com/api/auth/tokens', {api_key: process.env.API_KEY})
-  // .then((res) => token = res?.data?.token)
-  // .catch((err) => console.error(err));
-
-  // return res.json({"auth_token: ": token})
-
-  try {
-    const response = await axios.post(
-      "https://accept.paymob.com/api/auth/tokens",
-      { api_key: process.env.API_KEY }
-    );
-
-    const token = response.data.token;
-
-    return token;
-  } catch (err) {
-    console.error("Auth token error: ", err.response?.data || err.message);
-    throw new Error("Failed to fetch auth token!");
-  }
-};
 
 app.post("/api/order_inquiry", async (req, res) => {
   const order_id = req.body.order_id;
@@ -107,12 +89,11 @@ app.post("/api/order_inquiry", async (req, res) => {
       { headers: { Authorization: `Bearer ${token}` } }
     );
 
-    return res.json(inquiryResponse.data)
+    return res.json(inquiryResponse.data);
   } catch (err) {
     console.error(err);
-    res.status(500).json({error: 'Order inquiry failed!'})
+    res.status(500).json({ error: "Order inquiry failed!" });
   }
-
 });
 
 app.post("/api/transaction_inquiry", async (req, res) => {
@@ -128,13 +109,16 @@ app.post("/api/transaction_inquiry", async (req, res) => {
       { headers: { Authorization: `Bearer ${token}` } }
     );
 
-    return res.json(inquiryResponse.data)
+    return res.json(inquiryResponse.data);
   } catch (err) {
     console.error(err);
-    res.status(500).json({error: 'Order inquiry failed!'})
+    res.status(500).json({ error: "Order inquiry failed!" });
   }
-
 });
+
+app.use(paymentOperations);
+
+app.use('/api/weebhook', webhookroutes);
 
 const PORT = process.env.PORT || 5000;
 
