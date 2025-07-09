@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const hmacVerifier = require('../middleware/hamcVerifier')
+const hmacVerifier = require('../middleware/hmacVerifier')
 
-router.post("/api/webhook", (req, res) => {
+router.post("/webhook", (req, res) => {
   const payload = req.body
   const receivedHmac = req.query.hmac
   try {
@@ -15,6 +15,8 @@ router.post("/api/webhook", (req, res) => {
     if (!validHMAC ){
       throw new Error("Invalid HMAC signature!")
     }
+
+    
     return res.json("Webhook is working!");
   } catch (err) {
     console.error(err);

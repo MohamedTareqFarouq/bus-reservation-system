@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
-const hmacVerifier = require('./middleware/hamcVerifier')
 const webhookroutes = require('./routes/webhook')
 const paymentOperations = require('./routes/paymentOperations')
 const {fetchPaymobAuthToken} = require('./helperFunctions/fetchPaymobAuthToken')
@@ -118,7 +117,7 @@ app.post("/api/transaction_inquiry", async (req, res) => {
 
 app.use(paymentOperations);
 
-app.use('/api/weebhook', webhookroutes);
+app.use('/api', webhookroutes);
 
 const PORT = process.env.PORT || 5000;
 

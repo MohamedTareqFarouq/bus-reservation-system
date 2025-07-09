@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
-const baseUrl = "https://58bd15b7b2df.ngrok-free.app"
+const baseUrl = "https://d25ad497cfb1.ngrok-free.app"
 
 export const Payment = () => {
   const [transactionId, setTransactionId] = useState("");
