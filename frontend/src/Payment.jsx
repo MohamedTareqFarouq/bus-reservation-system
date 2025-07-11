@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
-const baseUrl = "https://e4a4b605e19f.ngrok-free.app"
+const baseUrl = "https://8b7e32880deb.ngrok-free.app";
 
 export const Payment = () => {
   const [transactionId, setTransactionId] = useState("");
@@ -11,11 +11,11 @@ export const Payment = () => {
 
   const getPaymentLink = async () => {
     const AMOUNT_CENTS = 50 * 100;
-    const Integration_ID = 4867403;
-    const First_Name = "mido";
-    const Last_Name = "teto";
+    const Integration_ID = 5183128;
+    const First_Name = "mohamed";
+    const Last_Name = "ahmed";
     const Customer_Phone_Number = 12343423;
-    const customer_email = "midoteraq@gmail.com";
+    const customer_email = "modystar9999@gmail.com";
     // const PUBLIC_KEY = "egy_pk_test_rrjr6khvweS99K01ECH7JZGvdVu7DzNH"
     console.log({ AMOUNT_CENTS });
     const body = {
