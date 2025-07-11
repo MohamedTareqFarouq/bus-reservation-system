@@ -43,7 +43,11 @@ app.post("/api/pay", async (req, res) => {
       })
       .then(
         (res) =>
+<<<<<<< HEAD
           (PAYMENT_URL = `https://accept.paymob.com/api/acceptance/iframes/938147?payment_token=${res.data.payment_keys[0].key}`)
+=======
+          (PAYMENT_URL = `https://accept.paymob.com/api/acceptance/iframes/${process.env.ifram_Id}?payment_token=${res.data.payment_keys[0].key}`)
+>>>>>>> 3ebebf2a1155810fb56ec5d004b3f213ef7e56df
       )
       .catch((err) => console.error(err.response?.data || err.message));
   } catch (err) {
