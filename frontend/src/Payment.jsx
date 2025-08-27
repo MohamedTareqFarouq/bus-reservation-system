@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import "./App.css";
-const baseUrl = "https://e4a4b605e19f.ngrok-free.app"
+const baseUrl = "https://a01ab92dd768.ngrok-free.app";
 
 export const Payment = () => {
   const [transactionId, setTransactionId] = useState("");
@@ -46,9 +46,8 @@ export const Payment = () => {
         ee: 22,
       },
 
-      notification_url:
-        `${baseUrl}/api/webhook`,
-      redirection_url: "http://localhost:3000/success",
+      notification_url: `${baseUrl}/api/webhook`,
+      redirection_url: "http://localhost:5173/success",
       //Notification and redirection URL are working only with Cards and they overlap the transaction processed and response callbacks sent per Integration ID
     };
 
