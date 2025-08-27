@@ -27,3 +27,4 @@ yarn-error.log*
 .babelrc
 .babelrc.js
 babel.config.*
+frontend/node_modules/.cache/.eslintcache
